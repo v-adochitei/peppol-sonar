@@ -1,0 +1,181 @@
+/* Cadres souples et beaucoup de vide : les traits durs criaient pareil sur tous les blocs, donc
+   rien ne ressortait. Une seule encre, la couleur réservée au statut. */
+:root{
+  --bg:#f4f4f2; --surface:#fff; --ink:#131a2e; --ink2:#4c5468; --muted:#757c8c;
+  --hair:#e7e7e3; --accent:#1b3bdb; --accent-soft:#eaeeff; --blip:#ff3d71;
+  --ok:#0f7a53; --ok-bg:#e6f6ee; --ok-line:#a9ddc6;
+  --warn:#8a5a00; --warn-bg:#fdf1dc; --warn-line:#f0d6a4;
+  --bad:#b3213f; --bad-bg:#fdeaee; --bad-line:#f4c2ce;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --r:22px; --lift:0 1px 2px rgba(19,26,46,.04), 0 10px 28px -14px rgba(19,26,46,.16);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);padding:0 20px 80px;
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+/* La provenance ne peut s'écrire qu'à la fin, quand la mesure est connue, mais elle se lit sous la
+   barre de recherche. L'ordre visuel est donc fixé ici : pas de script, pas de place réservée. */
+.wrap{max-width:880px;margin:0 auto;display:flex;flex-direction:column}
+.wrap>*{order:2;min-height:0}
+.wrap>h1,.wrap>.sub,.wrap>form:not(.bloc){order:0}
+.wrap>.prov{order:1}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.86em;background:var(--accent-soft);color:var(--accent);padding:2px 7px;border-radius:7px}
+
+h1{display:flex;align-items:center;gap:10px;margin:0;padding:26px 6px 3px;font-size:19px;font-weight:700;letter-spacing:-.025em}
+.logo{width:25px;height:25px;flex:none;color:var(--accent)}
+.sub{margin:0;padding:0 6px 16px;color:var(--muted);font-size:13.5px}
+
+/* The band behind the sticky pill hides the content scrolling under it. */
+.search{position:sticky;top:0;z-index:9;background:var(--bg);padding:14px 0 10px;margin:0 0 4px}
+.champ{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:999px;padding:10px 12px 10px 22px;box-shadow:var(--lift)}
+input[name=q]{flex:1;min-width:0;border:0;background:transparent;font:600 15px/1.4 var(--mono);color:var(--ink);outline:0;padding:2px}
+input[name=q]::placeholder{color:#b4b8c4;font-weight:400;font-family:inherit}
+button{border:0;border-radius:999px;background:var(--ink);color:#fff;font:600 14px/1 inherit;padding:12px 21px;cursor:pointer;white-space:nowrap}
+button:hover{background:var(--accent)}
+.note{color:var(--muted);font-size:12.5px;margin:-6px 0 20px;padding:0 10px;line-height:1.7}
+.info{border-bottom:1px dotted var(--muted);cursor:help}
+.hint,.prov{color:var(--muted);font-size:12.5px;margin:0 0 24px;padding:0 8px;line-height:1.7}
+.prov{font-family:var(--mono);font-size:11.5px}
+.prov.src{text-align:right;margin:0 0 14px}
+
+/* L'entreprise, puis le verdict. */
+.identite{margin:0 0 20px;padding:0 6px}
+.qui,.verdict{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px}
+.verdict{margin-top:12px}
+.who{font-size:24px;font-weight:700;letter-spacing:-.03em;line-height:1.15}
+.qui>.sec{font:12px/1.6 var(--mono)}
+.ou{font-size:17px;color:var(--ink2)}
+.ou strong{color:var(--ink);font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;padding:8px 16px 8px 13px;border-radius:999px;
+  font-weight:600;font-size:14px;background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-line)}
+.pill::before{content:"";width:8px;height:8px;border-radius:99px;background:currentColor;flex:none}
+.pill.w{background:var(--warn-bg);color:var(--warn);border-color:var(--warn-line)}
+.pill.b{background:var(--bad-bg);color:var(--bad);border-color:var(--bad-line)}
+.pill.dim{background:var(--surface);color:var(--ink2);border-color:var(--hair)}
+.pill.dim::before{background:var(--muted)}
+
+.card{background:var(--surface);border-radius:var(--r);box-shadow:var(--lift);padding:26px 28px;margin:0 0 18px}
+.card h2{margin:0 0 18px;font-size:15px;font-weight:600;line-height:1.4;color:var(--ink)}
+.card h2 .tag{margin:0 0 0 8px;vertical-align:1px}
+.ligne{margin:0;font-size:14.5px}
+.lib{font-weight:600;margin-right:6px}
+.pied{margin:14px 0 0}
+.ailleurs strong{color:var(--warn)}
+.pied .ghost{margin:0 10px 0 0;background:var(--accent-soft);color:var(--accent)}
+.pied .ghost:hover{color:#fff}
+dl{display:grid;grid-template-columns:158px 1fr;gap:16px 22px;margin:0;align-items:baseline}
+dt{color:var(--muted);font-size:13px;line-height:1.5}
+dt::first-letter{text-transform:uppercase}
+dd{margin:0;font-size:14.5px;min-width:0}
+.mono{font-family:var(--mono);font-size:12.5px;word-break:break-all}
+.sec{color:var(--muted);font-size:13px}
+.tag,.fmt{display:inline-block;font:500 12.5px/1.5 inherit;padding:4px 11px;border-radius:999px;background:var(--bg);color:var(--ink2);margin:0 5px 5px 0}
+.tag{font-family:var(--mono);font-size:12px}
+.tag.on{background:var(--accent-soft);color:var(--accent)}
+.meta{color:var(--muted);font-size:13px;margin:-10px 0 18px}
+
+.banner{border-radius:var(--r);padding:20px 24px;margin:0 0 18px;font-size:14.5px;line-height:1.6}
+.b-warn{background:var(--warn-bg);color:#5c3c00;border:1px solid var(--warn-line)}
+.b-bad{background:var(--bad-bg);color:#6f1128;border:1px solid var(--bad-line)}
+.b-dim{background:var(--surface);color:var(--ink2);border:1px solid var(--hair)}
+.banner code{background:rgba(255,255,255,.65)}
+.banner .sec{color:inherit;opacity:.72;font-family:var(--mono);font-size:11.5px}
+.err{background:var(--bad-bg);color:#6f1128;border:1px solid var(--bad-line);border-radius:var(--r);padding:20px 24px;font-weight:500}
+.ghost{display:inline-block;margin-top:14px;margin-right:8px;background:var(--ink);color:#fff;border-radius:999px;
+  padding:10px 20px;font-size:13.5px;font-weight:600}
+.ghost:hover{background:var(--accent);color:#fff;text-decoration:none}
+
+/* Plusieurs fiches possibles : une liste de blocs cliquables plutôt qu'une rangée de boutons. */
+.picks{display:grid;gap:10px;margin:0 0 18px}
+.pick{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 14px;background:var(--surface);border-radius:16px;
+  box-shadow:var(--lift);padding:16px 20px;color:var(--ink);text-decoration:none;transition:box-shadow .12s ease}
+.pick:hover{text-decoration:none;box-shadow:0 1px 2px rgba(19,26,46,.05),0 14px 32px -14px rgba(19,26,46,.3)}
+.pick .pid{font:600 13px/1.5 var(--mono);color:var(--accent)}
+.pick .pmeta{color:var(--muted);font-size:13px;flex:1 1 auto}
+.pick::after{content:"\2192";color:var(--muted);margin-left:auto;font-size:16px}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:12px;font-weight:600;line-height:1.5;color:var(--muted);
+  padding:0 14px 12px 0;border-bottom:1px solid var(--hair);white-space:nowrap}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+tr:last-child td{border-bottom:0}
+
+details{margin-top:22px;border-top:1px solid var(--hair);padding-top:16px}
+summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--accent)}
+.plus details{margin:0;padding:14px 0}
+.plus details:first-child{border-top:0;padding-top:0}
+.plus details:last-child{padding-bottom:0}
+.plus details .meta{margin:14px 0 16px}
+details.liste{margin-top:10px;border-top:0;padding-top:0}
+details.liste summary{font-size:13px;font-weight:500}
+.aide p{color:var(--ink2);font-size:13.5px;margin:12px 0 0}
+details dl{margin-top:20px;font-size:13.5px}
+pre{background:var(--bg);border-radius:14px;padding:14px 16px;overflow-x:auto;font:12px/1.65 var(--mono);
+  margin:9px 0 0;white-space:pre-wrap;word-break:break-all;color:var(--ink2)}
+.ok{color:var(--ok);font-weight:600}
+.warn{color:var(--warn);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+
+/* Le logo bat pendant la mesure ; sans script il reste simplement immobile. */
+.logo .ping{transform-box:view-box;transform-origin:6px 16px;animation:ping var(--beat,2.6s) cubic-bezier(.2,.6,.3,1) infinite}
+.logo .ping2{animation-delay:calc(var(--beat,2.6s) * .13)}
+.logo .ping3{animation-delay:calc(var(--beat,2.6s) * .26)}
+.logo .blip{transform-box:view-box;transform-origin:27.5px 16px;fill:var(--blip);animation:blip var(--beat,2.6s) ease-out infinite;animation-delay:calc(var(--beat,2.6s) * .42)}
+@keyframes ping{0%{opacity:0;transform:scale(.5)}18%{opacity:1}100%{opacity:0;transform:scale(1.15)}}
+@keyframes blip{0%,38%{opacity:.25;transform:scale(.7)}48%{opacity:1;transform:scale(1.3)}100%{opacity:.25;transform:scale(.7)}}
+body.scanning{--beat:.9s}
+@media (prefers-reduced-motion:reduce){.logo .ping,.logo .blip{animation:none;opacity:1;transform:none}}
+
+/* Le lot : une zone de collage qui accepte aussi un fichier déposé. */
+.titre{margin:4px 0 14px;padding:0 6px;font-size:22px;font-weight:700;letter-spacing:-.02em}
+.bloc{display:block;position:static;background:none;box-shadow:none;border-radius:0;padding:0;margin:0 0 18px}
+.depot{background:var(--surface);border-radius:var(--r);box-shadow:var(--lift);padding:18px 20px;margin:0 0 14px}
+.depot.survol{outline:2px dashed var(--accent);outline-offset:-6px}
+.depot textarea{width:100%;border:0;outline:0;resize:vertical;background:transparent;color:var(--ink);
+  font:13px/1.7 var(--mono);min-height:180px}
+.depot textarea::placeholder{color:#b4b8c4;font-family:inherit}
+.depot .sec{margin:10px 0 0}
+.lien{color:var(--accent);cursor:pointer;text-decoration:underline}
+.choix{margin:0 0 12px;font-size:14px;line-height:1.6}
+.choix:last-child{margin-bottom:0}
+.choix input{margin-right:8px}
+
+/* Places tenues pendant que le document arrive. Elles sont écrites en tête du document, puisque
+   rien d'autre n'est encore connu, mais elles tiennent la place de ce qui vient APRES : sans cet
+   ordre, le squelette du dernier bloc s'affichait au-dessus de la carte déjà arrivée. */
+.wrap>.skel{order:3}
+.skel{opacity:.85}
+.sk-l{display:block;height:11px;border-radius:999px;margin:0 0 15px;background:#eceae4;
+  background-image:linear-gradient(90deg,#eceae4 0 30%,#f6f5f1 50%,#eceae4 70% 100%);
+  background-size:280% 100%;animation:sweep 1.5s linear infinite}
+.sk-l:last-child{margin-bottom:0}
+@keyframes sweep{from{background-position:100% 0}to{background-position:-180% 0}}
+@media (prefers-reduced-motion:reduce){.sk-l{animation:none}}
+
+.copy{cursor:copy;position:relative}
+.copy:hover{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.copy.copied::after{content:"copié";position:absolute;left:0;top:-1.7em;font:600 10px/1.4 var(--mono);
+  background:var(--ink);color:#fff;padding:3px 8px;border-radius:999px;white-space:nowrap}
+a:focus-visible,button:focus-visible,summary:focus-visible,.copy:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+
+@media(max-width:720px){
+  dl{grid-template-columns:1fr;gap:4px 0}
+  dt{margin-top:15px}
+  .who{font-size:20px}
+}
+@media(max-width:480px){
+  body{padding:0 13px 60px}
+  .card{padding:20px 18px}
+  .banner{padding:17px 18px}
+  table,thead,tbody,tr,th,td{display:block;width:100%}
+  th{display:none}
+  td{padding:3px 0;border:0}
+  tr{border-bottom:1px solid var(--hair);padding:11px 0}
+  .champ{padding:8px 8px 8px 16px}
+  button{padding:11px 16px}
+}
